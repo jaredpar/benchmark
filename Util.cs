@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -32,5 +33,14 @@ internal static class Util
         }
 
         return path;
+    }
+
+    public static string GetConsoleCompilerLog()
+    {
+        var dir = GetCompilerLogDirectory();
+        var name = RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
+            ? "console.complog"
+            : "console-linux.complog";
+        return Path.Combine(dir, name);
     }
 }

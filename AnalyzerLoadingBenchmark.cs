@@ -34,7 +34,8 @@ public class AnalyzerLoadingBenchmark
         };
 
         Directory.CreateDirectory(AnalyzerDirectory);
-        using var reader = CompilerLogReader.Create(Path.Combine(Util.GetCompilerLogDirectory(), "console.complog"));
+
+        using var reader = CompilerLogReader.Create(Util.GetConsoleCompilerLog());
         var call = reader.ReadCompilerCall(0);
         foreach (var tuple in reader.ReadAnalyzerFileInfo(call))
         {
