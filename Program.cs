@@ -5,11 +5,8 @@ using CompilerBenchmark;
 using Microsoft.CodeAnalysis.CSharp;
 
 // _ = BenchmarkRunner.Run(typeof(CompilationBenchmak));
-#if NETCOREAPP
-_ = BenchmarkRunner.Run(typeof(AnalyzerLoadingBenchmark));
-#else
-Console.WriteLine("why");
-#endif
+// _ = BenchmarkRunner.Run(typeof(RefAndImplTimes).Assembly);
+BenchmarkSwitcher.FromAssembly(typeof(Program).Assembly).Run(args);
 
 /*
 var b = new CompilationBenchmak();

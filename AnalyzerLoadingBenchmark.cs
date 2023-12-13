@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 namespace CompilerBenchmark;
 #nullable disable
 
+/*
 [GcServer(true)]
 [SimpleJob(RuntimeMoniker.Net70)]
 public class AnalyzerLoadingBenchmark
@@ -99,4 +100,5 @@ public class AnalyzerLoadingBenchmark
         }
     }
 }
+*/
 #endif

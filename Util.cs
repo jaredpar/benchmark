@@ -19,28 +19,28 @@ internal static class Util
                 throw new Exception("Cannot find compiler resource directory");
             }
 
-            if (File.Exists(Path.Combine(path, "compiler.complog")))
+            var name = Path.Combine(path, "complog");
+            if (Directory.Exists(name))
             {
-                break;
+                return name;
             }
 
             path = Path.GetDirectoryName(path);
         } while (true);
-
-        if (path is null)
-        {
-            throw new Exception("Could not find compiler logs");
-        }
-
-        return path;
     }
 
-    public static string GetConsoleCompilerLog()
+    public static string GetCompilerLog(string name)   
     {
         var dir = GetCompilerLogDirectory();
-        var name = RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
-            ? "console.complog"
-            : "console-linux.complog";
         return Path.Combine(dir, name);
+    }
+
+    public static MemoryStream GetCompilerLogStream(string name)   
+    {
+        var filePath = GetCompilerLog(name);
+        using var fileStream = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+        var stream = new MemoryStream();
+        fileStream.CopyTo(stream);
+        return stream;
     }
 }
